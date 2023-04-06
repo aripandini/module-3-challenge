@@ -15,6 +15,7 @@ function generatePassword(){
   //promt user for password criteria
   //length between 8 < 128
   // character type lowercase, uppercase, numeric, and/or special characters
+  // validate input
 
   numberOfChar = prompt("How long do you want your password to be? Choose between 8-128 characters.");
   if (numberOfChar < 8 || numberOfChar > 128) {
@@ -63,12 +64,30 @@ function generatePassword(){
     return "Try again. At least one character type must be selected for password to be generated";
   };
 
-  // validate input 
-  // generate password based on criteria 
-  //display password 
+  
+  // generate password based on criteria, choosing randomly
 
-  return "Generated password goes here"
-}
+  if (hasLowercase) {
+    possibleChar = possibleChar.concat(lowercaseLetters);
+  }
+  if (hasUppercase) {
+    possibleChar = possibleChar.concat(uppercaseLetters);
+  }
+  if (hasNumbers) {
+    possibleChar = possibleChar.concat(numbers);
+  }
+  if (hasSymbols) {
+    possibleChar = possibleChar.concat(symbols);
+  }
+  
+  let finalPassword = "";
+  for (let i = 0; i < numberOfChar; i++) {
+    let rng =[Math.floor(Math.random() * possibleChar.length)];
+    finalPassword = finalPassword + possibleChar[rng];
+  }
+    //display password
+  return finalPassword;
+};
 
 
 
